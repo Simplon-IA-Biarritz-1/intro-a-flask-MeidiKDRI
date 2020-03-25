@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+
+    <head>
+        <title>Formulaire</title>
+        <link rel ="stylesheet" type="text/css" href="{{ url_for('static', filename='custom.css')}}">
+        <h1 >Inscriptions</h1>
+    </head>
+
+    <body>
+        <a href = "{{url_for('home')}}"> Pages Accueil</a>
+
+        <h2>Formulaire d'enregistrement</h2>
+			<form action="#" method="POST">
+                <label>Nom</label> :
+                <br><input type="text" name="nom" /><br>
+
+                <label>Prénom</label> :
+                <br><input type="text" name="prenom" /><br>
+
+                <label>Sexe</label> :<br>
+                <select name="sexe" id="sexe-select">
+                    <option value="m">Masculin</option>
+                    <option value="f">Féminin</option>
+                </select>
+
+                <label>Pseudo</label> :<br>
+                <input type="text" name="pseudo" /><br> 
+                <p3 style="color: crimson;">{{error}}</p>
+
+                <input class = 'button'  type="submit" value="Envoyer" />
+			</form>
+    </body>
+</html>
+

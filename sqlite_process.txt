@@ -1,0 +1,28 @@
+tu importe le bousin : (évidemment faut l'installer avant)
+from flask_sqlalchemy import SQLAlchemy
+
+tu crée ton fichier bdd (chez moi c'est config.db)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///config.db'
+
+tu relis la bdd a app
+db = SQLAlchemy(app)
+
+tu crée une classe ( = table en mysql) exemple :
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    username = db.Column(db.String(20), unique = True, nullable = False)
+
+et pi ensuite tu ouvre ton terminal python
+from ton fichier import db
+
+Sa affiche du rififfi, t'enchaine avec
+db.create_all()
+
+la sa va créé le fichier avec toute la base de donnée faite en python et apres tu t'amuse :
+from ton fichier import User
+
+puis tu crée des users :
+user_1 = User(username='Meidi')
+
+et un second
+user_2 = User(username='Joffrey'

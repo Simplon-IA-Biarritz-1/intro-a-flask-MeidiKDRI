@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+
+    <head>
+        <title>Prédictions</title>
+        <link rel ="stylesheet" type="text/css" href="{{ url_for('static', filename='custom.css')}}">
+        <h1>Reconnaissance de chiffre</h1>
+
+    </head>
+
+    <body>
+        <a href = "{{url_for('home')}}"> Pages Accueil</a>
+
+        <h2>Charger une image</h2>
+        <form action = "#" method = "POST" enctype = "multipart/form-data">
+            <input type = "file" name = "file" />
+            <input type = "submit" value="Charger une image"/>
+        </form>
+        <img src="{{image}}" alt="Image">
+
+    </body>
+</html>
