@@ -1,21 +1,10 @@
-<!doctype html>
-<html>
+{% extends "base.html" %}
 
-    <head>
-        <title>HomePage</title>
-        <link rel ="stylesheet" type="text/css" href="{{ url_for('static', filename='custom.css')}}">
-        <h1 >HomePage</h1>
+{% block content %}
 
-    </head>
+    <title>Home</title>
 
-    <body>
-        <a href = "{{url_for('formulaire')}}"> Inscriptions</a>
+	<h1>Welcome to my first Flask App Project</h1>
+	<p>This project aims to experiment some features like forms, upload files management and machine learning with digit recognition.</p>
 
-        <a href = "{{url_for('users_page')}}"> Utilisateurs</a>
-
-        <a href = "{{url_for('stat_page')}}"> Statistics</a>
-
-        <a href = "{{url_for('pred_page')}}"> Prédictions</a>
-
-    </body>
-</html>
+{% endblock %}

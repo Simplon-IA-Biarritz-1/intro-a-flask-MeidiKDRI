@@ -1,12 +1,20 @@
 body {
-    background-color: lightgray;
-    font-family: Lato;
+    margin-top: 10px;
+    margin: 100px;
 }
 
 h1 {
     width: 60%;
     margin: auto;
-    background-color: #fff;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 15px;
+}
+
+h2 {
+    width: 60%;
+    margin: auto;
     text-align: center;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -14,9 +22,12 @@ h1 {
 }
 
 form{
+    display: inline;
     margin : 20px;
+    border-radius: 10px;
 }
 
 button{
     margin : 20px;
 }
+

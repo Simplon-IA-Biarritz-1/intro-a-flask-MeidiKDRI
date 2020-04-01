@@ -1,22 +1,21 @@
-<!doctype html>
-<html>
+{% extends "base.html" %}
 
-    <head>
-        <title>Prédictions</title>
-        <link rel ="stylesheet" type="text/css" href="{{ url_for('static', filename='custom.css')}}">
-        <h1>Reconnaissance de chiffre</h1>
+{% block content %}
 
-    </head>
+    <title>Digits recognition</title>
 
-    <body>
-        <a href = "{{url_for('home')}}"> Pages Accueil</a>
+	<h1>Reconnaissance de chiffre</h1>
 
-        <h2>Charger une image</h2>
-        <form action = "#" method = "POST" enctype = "multipart/form-data">
-            <input type = "file" name = "file" />
-            <input type = "submit" value="Charger une image"/>
-        </form>
-        <img src="{{image}}" alt="Image">
+	<h2>Charger une image</h2>
+	
+	<form action = "#" method = "POST" enctype = "multipart/form-data">
+		<input type = "file" name = "image_uploaded" />
+		<input type = "submit" value="Charger le fichier"/>
+	</form><br>
 
-    </body>
-</html>
+	<center><img src="{{base64img}}" alt="Image"></center>
+	<h3>{{reg_logistic}}</h3>
+	<h3>{{randomForest}}</h3>
+	<h3>{{svm}}</h3>
+
+{% endblock %}

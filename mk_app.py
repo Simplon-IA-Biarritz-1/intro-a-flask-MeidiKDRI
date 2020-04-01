@@ -1,6 +1,26 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, send_from_directory, url_for
 import mysql.connector as MS
+
+from werkzeug.utils import secure_filename
+import os
+import base64
+
 import pandas as pd
+import numpy as np
+
+from keras.datasets import mnist
+from sklearn.linear_model import LogisticRegression
+
+from skimage.color import rgb2gray
+import matplotlib.image as mpimg
+
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression 
+
+# Mnist dataset
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
+X_train = X_train.reshape(60000,-1)
+X_test = X_test.reshape(10000,-1)
 
 # Gestion de la connection à MariaSQL
 connection = MS.connect(user='root', password='root', host='127.0.0.1', buffered=True)
@@ -17,7 +37,7 @@ def home() :
 
 # Q 3-4 : Faire un lien vers une seconde page/ formulaire
 @app.route('/formulaire')
-def formulaire() :
+def form() :
     return render_template('formulaire.html')
 
 # Q 5 : Enregistrement dans une base SQL
@@ -73,15 +93,38 @@ def upload_file():
       return render_template('statistics.html', tables = [desc.to_html(classes = 'data')], titles = desc.columns.values)
 
 # Q 8 : Afficher une prediction à partir d'un modèle
-@app.route('/prediction')
+@app.route('/pred')
 def pred_page() :
     return render_template('prediction.html')
 
-@app.route('/prediction', methods = ['GET', 'POST'])
-def upload_image():
-   if request.method == 'POST':
-      picture = request.files['file']
-      return render_template('prediction.html', image = picture)
+@app.route('/pred', methods=['GET', 'POST'])
+def mnist_pred():
+    
+    # Image upload
+    img = request.files['image_uploaded']
+    # image saving
+    base64img = "data:image/png;base64,"+base64.b64encode(img.getvalue()).decode('ascii')
+
+    # Image preprocessing
+    img3d = mpimg.imread(img)
+    img3dgray = rgb2gray(img3d)
+    img3d = np.resize(img3dgray, (28, 28, 1))
+    img2d = img3d.reshape(1,-1)
+
+    #Random Forest
+    rf = RandomForestClassifier()
+    rf.fit(X_train, y_train)
+    y_pred_rf = rf.predict(img2d)
+
+    # Logistic Regression
+    reg_log = LogisticRegression()
+    reg_log.fit(X_train, y_train)
+    y_pred_reglog = reg_log.predict(img2d)
+
+    return render_template(
+        'prediction.html', base64img = base64img,
+        reg_logistic = f'Logistic Regression prediction : {y_pred_reglog}',
+        randomForest = f'Random Forest prediction: {y_pred_rf}')
 
 if __name__ == "__main__" :
     app.run(debug=True)

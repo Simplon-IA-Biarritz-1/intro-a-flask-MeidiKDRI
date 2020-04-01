@@ -1,31 +1,23 @@
-<!doctype html>
-<html>
+{% extends "base.html" %}
 
-    <head>
-        <title>Utilisateurs</title>
-        <link rel ="stylesheet" type="text/css" href="{{ url_for('static', filename='custom.css')}}">
-        <h1 >Utilisateurs</h1>
+{% block content %}
 
-    </head>
+<title>Users Listing</title>
+<h1 >Liste des Utilisateurs</h1>
 
-    <body>
-        <a href = "{{url_for('home')}}"> Pages Accueil</a>
+<center>
+    <table border="1" cellpadding="5" cellspacing="5">
+    {% for row in data %}
+        <tr>
+        {% for d in row %}
+            <td>{{ d }}</td>
+        {% endfor %}
+        </tr>
+    {% endfor %}
+    </table>
+</center>
 
-        <h2>Liste des utilisateurs</h2>
-
-        <table border="1" cellpadding="5" cellspacing="5">
-            {% for row in data %}
-                <tr>
-                {% for d in row %}
-                    <td>{{ d }}</td>
-                {% endfor %}
-                </tr>
-            {% endfor %}
-        </table>
-
-
-    </body>
-</html>
+{% endblock %}
 
 
 

@@ -1,16 +1,9 @@
-<!doctype html>
-<html>
+{% extends "base.html" %}
 
-    <head>
-        <title>Member Page</title>
-        <link rel ="stylesheet" type="text/css" href="{{ url_for('static', filename='custom.css')}}">
-        <h1>Espace membre</h1>
+{% block content %}
 
-    </head>
+    <title>Member Page</title>
+    <h1>Espace membre</h1>
+    <h2>{{message}}</h2>
 
-    <body>
-        <h2>{{message}}</h2>
-        <a href = "{{url_for('home')}}"> Pages Accueil</a>
-        <a href = "{{url_for('contact')}}"> Pages contact</a>
-    </body>
-</html>
+{% endblock %}

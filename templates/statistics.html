@@ -1,27 +1,22 @@
-<!doctype html>
-<html>
+{% extends "base.html" %}
 
-    <head>
-        <title>Statistics</title>
-        <link rel ="stylesheet" type="text/css" href="{{ url_for('static', filename='custom.css')}}">
-        <h1 >Statistics</h1>
-    </head>
+{% block content %}
 
-    <body>
-        <a href = "{{url_for('home')}}"> Pages Accueil</a>
+    <title>Statistics</title>
+    <h1 >Statistics</h1>
+    <h2>Chargement de fichier</h2>
 
-        <h2>Chargement de fichier</h2>
+    <form action = "#" method = "POST" enctype = "multipart/form-data">
+        <input type = "file" name = "file" />
+        <input type = "submit" value="Charger le fichier"/>
+    </form>
 
-        <form action = "#" method = "POST" enctype = "multipart/form-data">
-            <input type = "file" name = "file" />
-            <input type = "submit" value="Charger le fichier"/>
-        </form>
-        
-        <h2>Stats du fichier</h2>
-            {% for table in tables %}
-            {{titles[loop.index]}}
-            {{ table|safe }}
-            {% endfor %}
-    </body>
-</html>
+    <center>
+    <h2>Stats du fichier</h2>
+        {% for table in tables %}
+        {{titles[loop.index]}}
+        {{ table|safe }}
+        {% endfor %}
+    </center>
+{% endblock %}
 
